@@ -2,6 +2,7 @@ import React from 'react';
 import Blah from './Blah.js'
 import Header from './Header.js'
 import Main from './Main.js'
+import Footer from './Footer.js'
 
 import 'todomvc-common/base.css'
 import 'todomvc-app-css/index.css'
@@ -53,6 +54,43 @@ class App extends React.Component {
     )
   }
 
+  markAllAsCompleted = () => {
+    let allTasksFinished = true;
+    for(let i =0; i < this.state.todoList.length; i++){
+      if(!this.state.todoList[i].finished){
+        allTasksFinished = false
+        return
+      }
+    }
+
+    let markAllTrue = !allTasksFinished
+    
+    this.setState((prevState) => {
+      prevState.todoList.map(todo => {
+        todo.finished = markAllTrue;
+        return todo
+      })
+      return {
+        todoList: prevState.todoList
+      }
+    })
+  }
+
+  updateFilter = (filter) => {
+    this.setState({
+      filter: filter
+    })
+  }
+
+  clearCompleted = () => {
+    this.setState((prevState) => {
+      prevState.todoList = prevState.todoList.filter((todo) => todo.finished === false)
+      return {
+        todoList: prevState.todoList
+      }
+    })
+  }
+
   render() {
     return (
       <div>
@@ -63,26 +101,16 @@ class App extends React.Component {
             list={this.state.todoList}
             deleteItemFromTodoList={this.deleteItemFromTodoList}
             editItemFromTodoList={this.editItemFromTodoList}
+            markAllAsCompleted={this.markAllAsCompleted}
+            filter={this.state.filter}
           />
           {/* <!-- This footer should hidden by default and shown when there are todos --> */}
-          <footer className="footer">
-            {/* <!-- This should be `0 items left` by default --> */}
-            <span className="todo-count"><strong>0</strong> item left</span>
-            {/* <!-- Remove this if you don't implement routing --> */}
-            <ul className="filters">
-              <li>
-                <a className="selected" href="#/">All</a>
-              </li>
-              <li>
-                <a href="#/active">Active</a>
-              </li>
-              <li>
-                <a href="#/completed">Completed</a>
-              </li>
-            </ul>
-            {/* <!-- Hidden if no completed items are left ↓ --> */}
-            <button className="clear-completed">Clear completed</button>
-          </footer>
+          <Footer
+            count={this.state.todoList.length}
+            updateFilter={this.updateFilter}
+            filter={this.state.filter}
+            clearCompleted={this.clearCompleted}
+          />
         </section>
       </div>
     );

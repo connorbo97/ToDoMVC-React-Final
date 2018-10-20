@@ -10,6 +10,11 @@ class TodoList extends React.Component {
 
   renderTodos = () => {
     const renderTodo = (todo, index) => {
+      if(this.props.filter === 1 && todo.finished === true){
+        return null
+      } else if(this.props.filter === 2 && todo.finished === false){
+        return null
+      }
       console.log(todo)
       return (
         <Todo

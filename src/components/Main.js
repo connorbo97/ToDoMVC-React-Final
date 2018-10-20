@@ -9,15 +9,24 @@ class Main extends React.Component {
     }
   }
 
+  renderMarkAllCompletedButton = () => {
+    return (
+      <React.Fragment>
+        <input id="toggle-all" className="toggle-all" type="checkbox"/>
+        <label onClick={this.props.markAllAsCompleted} htmlFor="toggle-all">Mark all as complete</label>
+      </React.Fragment>
+    )
+  }
+
   render() {
     return (
       <section className="main">
-        <input id="toggle-all" className="toggle-all" type="checkbox"/>
-        <label htmlFor="toggle-all">Mark all as complete</label>
+        {this.renderMarkAllCompletedButton()}
         <TodoList
           list={this.props.list}
           deleteItemFromTodoList={this.props.deleteItemFromTodoList}
           editItemFromTodoList={this.props.editItemFromTodoList}
+          filter={this.props.filter}
         />
       </section>
     )

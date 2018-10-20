@@ -14,8 +14,19 @@ class Input extends React.Component {
     })
   }
 
+  strip = (val) => {
+    return val.replace(/^\s+|\s+$/g, '');
+  }
+
   onSubmit = (e) => {
     e.preventDefault()
+    let todo = this.strip(this.state.todo)
+    this.setState({
+      todo: ""
+    })
+    if(todo.length === 0){
+      return
+    }
     this.props.appendItemToDoList({
       title: this.state.todo,
       finished: false,
