@@ -1,47 +1,69 @@
-import React, { Component } from 'react';
+import React from 'react';
 import Blah from './Blah.js'
+import Header from './Header.js'
+import Main from './Main.js'
 
 import 'todomvc-common/base.css'
 import 'todomvc-app-css/index.css'
 
-class App extends Component {
+
+//Filters conversion
+//0 = all todos
+//1 = only unfinished todos
+//2 = only finished todos
+
+
+class App extends React.Component {
   constructor(props){
     super(props)
+    this.state = {
+      todoList: [],
+      filter: 0,
+    }
+  }
+
+  appendItemToDoList = (newItem) => {
+    this.setState((prevState) => {
+        prevState.todoList.push(newItem)
+        return {
+          todoList: prevState.todoList
+        }
+      }
+    )
+  }
+
+  deleteItemFromTodoList = (index) => {
+    this.setState((prevState) => {
+        prevState.todoList.splice(index,1)
+        console.log(prevState.todoList)
+        return {
+          todoList: prevState.todoList
+        }
+      }
+    )
+  }
+
+  editItemFromTodoList = (editedItem, index) => {
+    this.setState((prevState) => {
+        prevState.todoList[index] = editedItem
+        return {
+          todoList: prevState.todoList
+        }
+      }
+    )
   }
 
   render() {
     return (
       <div>
         <section className="todoapp">
-          <header className="header">
-            <h1>todos</h1>
-            <input className="new-todo" placeholder="What needs to be done?" autoFocus/>
-          </header>
+          <Header appendItemToDoList={this.appendItemToDoList}/>
           {/* <!-- This section should be hidden by default and shown when there are todos --> */}
-          <section className="main">
-            <input id="toggle-all" className="toggle-all" type="checkbox"/>
-            <label htmlFor="toggle-all">Mark all as complete</label>
-            <ul className="todo-list">
-              {/* <!-- These are here just to show the structure of the list items -->
-              <!-- List items should get the className `editing` when editing and `completed` when marked as completed --> */}
-              <li className="completed">
-                <div className="view">
-                  <input className="toggle" type="checkbox" defaultChecked/>
-                  <label>Taste JavaScript</label>
-                  <button className="destroy"></button>
-                </div>
-                <input className="edit" defaultValue="Create a TodoMVC template"/>
-              </li>
-              <li>
-                <div className="view">
-                  <input className="toggle" type="checkbox"/>
-                  <label>Buy a unicorn</label>
-                  <button className="destroy"></button>
-                </div>
-                <input className="edit" defaultValue="Rule the web"/>
-              </li>
-            </ul>
-          </section>
+          <Main
+            list={this.state.todoList}
+            deleteItemFromTodoList={this.deleteItemFromTodoList}
+            editItemFromTodoList={this.editItemFromTodoList}
+          />
           {/* <!-- This footer should hidden by default and shown when there are todos --> */}
           <footer className="footer">
             {/* <!-- This should be `0 items left` by default --> */}
@@ -62,7 +84,6 @@ class App extends Component {
             <button className="clear-completed">Clear completed</button>
           </footer>
         </section>
-        <Blah/>
       </div>
     );
   }
