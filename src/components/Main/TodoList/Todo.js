@@ -17,7 +17,7 @@ class Todo extends React.Component {
   renderCheckbox = () => {
     if(this.props.finished){
       return (
-        <input className="toggle" type="checkbox" defaultChecked onClick={this.updateFinished}/>
+        <input className="toggle" type="checkbox" checked onClick={this.updateFinished}/>
       )
     } else {
       return (

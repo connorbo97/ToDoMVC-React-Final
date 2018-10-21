@@ -59,12 +59,11 @@ class App extends React.Component {
     for(let i =0; i < this.state.todoList.length; i++){
       if(!this.state.todoList[i].finished){
         allTasksFinished = false
-        return
+        break
       }
     }
 
     let markAllTrue = !allTasksFinished
-    
     this.setState((prevState) => {
       prevState.todoList.map(todo => {
         todo.finished = markAllTrue;

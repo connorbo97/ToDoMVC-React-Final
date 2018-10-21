@@ -15,7 +15,6 @@ class TodoList extends React.Component {
       } else if(this.props.filter === 2 && todo.finished === false){
         return null
       }
-      console.log(todo)
       return (
         <Todo
           key={index}
