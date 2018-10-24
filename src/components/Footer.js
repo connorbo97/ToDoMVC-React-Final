@@ -8,16 +8,27 @@ class Footer extends React.Component {
     }
   }
 
+  renderClearCompleted = () => {
+    //if there's no completed items
+    //don't render the button
+    if(this.props.count === this.props.total){
+      return null
+    }
+    
+    return (
+      <button className="clear-completed" onClick={this.props.clearCompleted}>Clear completed</button>
+    )
+  }
+
   render() {
+    //if there's no todos, render nothing
     if(this.props.total == 0){
       return null
     }
 
     return (
       <footer className="footer">
-        {/* <!-- This should be `0 items left` by default --> */}
-        <span className="todo-count"><strong>{this.props.count}</strong> item left</span>
-        {/* <!-- Remove this if you don't implement routing --> */}
+        <span className="todo-count"><strong>{this.props.count}</strong> items left</span>
         <ul className="filters">
           <li>
             <a className={this.props.filter === 0 ? "selected" : 0} href="#/" onClick={()=>this.props.updateFilter(0)}>All</a>
@@ -29,8 +40,7 @@ class Footer extends React.Component {
             <a className={this.props.filter === 2 ? "selected" : 0} href="#/completed" onClick={()=>this.props.updateFilter(2)}>Completed</a>
           </li>
         </ul>
-        {/* <!-- Hidden if no completed items are left ↓ --> */}
-        <button className="clear-completed" onClick={this.props.clearCompleted}>Clear completed</button>
+        {this.renderClearCompleted()}
       </footer>
     )
   }

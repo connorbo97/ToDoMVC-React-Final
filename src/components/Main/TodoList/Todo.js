@@ -8,6 +8,7 @@ class Todo extends React.Component {
     }
   }
 
+  //toggle the finished state of the item
   updateFinished = () => {
     let newItem = this.props.todo
     newItem.finished = !newItem.finished
@@ -15,17 +16,21 @@ class Todo extends React.Component {
   }
 
   renderCheckbox = () => {
+    //if the todo is finished, render a checked checkbox
     if(this.props.finished){
       return (
         <input className="toggle" type="checkbox" readOnly={true} checked onClick={this.updateFinished}/>
       )
-    } else {
+    }
+    //else render an unchecked one
+    else {
       return (
         <input className="toggle" type="checkbox" readOnly={true} onClick={this.updateFinished}/>
       )
     }
   }
 
+  //the function called when something is typed when the todo is editing
   updateEdit = (e) => {
     this.setState({val: e.target.value})
   }
@@ -45,33 +50,6 @@ class Todo extends React.Component {
         </label>
       </React.Fragment>
     )
-    // if(this.props.editing){
-    //   return (
-    //     <form onSubmit={()=> {
-    //         let newItem = this.props.todo
-    //         newItem.value = this.state.value
-    //         newItem.editing = false
-    //         this.setState({val:""})
-    //         this.editItem()
-    //       }
-    //     }>
-    //       <input className="edit" onChange={this.updateEdit} defaultValue={this.props.title}/>
-    //     </form>
-    //   )
-    // } else {
-    //   return (
-    //     <label onDoubleClick={()=>{
-    //         let newItem = this.props.todo
-    //         newItem.editing = !newItem.editing
-    //         this.setState({val:newItem.title})
-    //         console.log(newItem)
-    //         this.props.editItem(newItem)
-    //       }}
-    //     >
-    //       {this.props.title}
-    //     </label>
-    //   )
-    // }
   }
 
   renderEditSection(){

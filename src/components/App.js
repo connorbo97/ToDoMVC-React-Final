@@ -22,6 +22,8 @@ class App extends React.Component {
     }
   }
 
+  //adds item to the to do list
+  //new item should be a json
   appendItemToDoList = (newItem) => {
     this.setState((prevState) => {
         prevState.todoList.push(newItem)
@@ -32,6 +34,7 @@ class App extends React.Component {
     )
   }
 
+  //deletes item from the to do list at the index provided
   deleteItemFromTodoList = (index) => {
     this.setState((prevState) => {
         prevState.todoList.splice(index,1)
@@ -43,6 +46,9 @@ class App extends React.Component {
     )
   }
 
+  //replaces the current item in the to do list
+  //at the provided index with editedItem
+  //editedItem should be a json
   editItemFromTodoList = (editedItem, index) => {
     this.setState((prevState) => {
         prevState.todoList[index] = editedItem
@@ -53,6 +59,7 @@ class App extends React.Component {
     )
   }
 
+  //marks every item in the to do list as completed
   markAllAsCompleted = () => {
     let allTasksFinished = true;
     for(let i =0; i < this.state.todoList.length; i++){
@@ -74,12 +81,15 @@ class App extends React.Component {
     })
   }
 
+  //update ther filter
   updateFilter = (filter) => {
     this.setState({
       filter: filter
     })
   }
 
+  //removes all items in the todo list that
+  //are completed
   clearCompleted = () => {
     this.setState((prevState) => {
       prevState.todoList = prevState.todoList.filter((todo) => todo.finished === false)
@@ -89,6 +99,8 @@ class App extends React.Component {
     })
   }
 
+  //returns the number of items in the to do list
+  //that are not finished
   getNumToBeDone = () => {
     let count = 0;
     this.state.todoList.forEach(todo => {
@@ -103,7 +115,6 @@ class App extends React.Component {
       <div>
         <section className="todoapp">
           <Header appendItemToDoList={this.appendItemToDoList}/>
-          {/* <!-- This section should be hidden by default and shown when there are todos --> */}
           <Main
             list={this.state.todoList}
             deleteItemFromTodoList={this.deleteItemFromTodoList}
@@ -111,7 +122,6 @@ class App extends React.Component {
             markAllAsCompleted={this.markAllAsCompleted}
             filter={this.state.filter}
           />
-          {/* <!-- This footer should hidden by default and shown when there are todos --> */}
           <Footer
             count={this.getNumToBeDone()}
             total={this.state.todoList.length}

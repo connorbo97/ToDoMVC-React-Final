@@ -14,10 +14,14 @@ class Input extends React.Component {
     })
   }
 
+  //removes whitespace from the ends
+  //usually this is included in the language
+  //but for some reason js doesn't have it
   strip = (val) => {
     return val.replace(/^\s+|\s+$/g, '');
   }
 
+  //called when the user presses enter
   onSubmit = (e) => {
     e.preventDefault()
     let todo = this.strip(this.state.todo)
