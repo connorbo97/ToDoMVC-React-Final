@@ -33,8 +33,6 @@ class TodoList extends React.Component {
   render() {
     return (
       <ul className="todo-list">
-        {/* <!-- These are here just to show the structure of the list items -->
-        <!-- List items should get the className `editing` when editing and `completed` when marked as completed --> */}
         {this.renderTodos()}
       </ul>
     )

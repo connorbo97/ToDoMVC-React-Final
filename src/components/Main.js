@@ -19,6 +19,11 @@ class Main extends React.Component {
   }
 
   render() {
+    //if theres no items in the list, show nothing
+    if(this.props.list.length === 0){
+      return null
+    }
+
     return (
       <section className="main">
         {this.renderMarkAllCompletedButton()}

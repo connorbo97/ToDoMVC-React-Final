@@ -9,6 +9,10 @@ class Footer extends React.Component {
   }
 
   render() {
+    if(this.props.total == 0){
+      return null
+    }
+
     return (
       <footer className="footer">
         {/* <!-- This should be `0 items left` by default --> */}

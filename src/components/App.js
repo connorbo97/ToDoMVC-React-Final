@@ -1,5 +1,4 @@
 import React from 'react';
-import Blah from './Blah.js'
 import Header from './Header.js'
 import Main from './Main.js'
 import Footer from './Footer.js'
@@ -90,6 +89,15 @@ class App extends React.Component {
     })
   }
 
+  getNumToBeDone = () => {
+    let count = 0;
+    this.state.todoList.forEach(todo => {
+      if(!todo.finished)
+        count += 1
+    })
+    return count
+  }
+
   render() {
     return (
       <div>
@@ -105,7 +113,8 @@ class App extends React.Component {
           />
           {/* <!-- This footer should hidden by default and shown when there are todos --> */}
           <Footer
-            count={this.state.todoList.length}
+            count={this.getNumToBeDone()}
+            total={this.state.todoList.length}
             updateFilter={this.updateFilter}
             filter={this.state.filter}
             clearCompleted={this.clearCompleted}

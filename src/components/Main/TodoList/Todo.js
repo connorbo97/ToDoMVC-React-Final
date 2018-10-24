@@ -17,11 +17,11 @@ class Todo extends React.Component {
   renderCheckbox = () => {
     if(this.props.finished){
       return (
-        <input className="toggle" type="checkbox" checked onClick={this.updateFinished}/>
+        <input className="toggle" type="checkbox" readOnly={true} checked onClick={this.updateFinished}/>
       )
     } else {
       return (
-        <input className="toggle" type="checkbox" onClick={this.updateFinished}/>
+        <input className="toggle" type="checkbox" readOnly={true} onClick={this.updateFinished}/>
       )
     }
   }
