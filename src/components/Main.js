@@ -1,5 +1,5 @@
 import React from 'react';
-import TodoList from './Main/TodoList.js'
+import TodoListContainer from './Main/containers/TodoListContainer.js'
 
 
 class Main extends React.Component {
@@ -13,26 +13,21 @@ class Main extends React.Component {
     return (
       <React.Fragment>
         <input id="toggle-all" className="toggle-all" type="checkbox"/>
-        <label onClick={this.props.markAllAsCompleted} htmlFor="toggle-all">Mark all as complete</label>
+        <label onClick={this.props.markAllCompleted} htmlFor="toggle-all">Mark all as complete</label>
       </React.Fragment>
     )
   }
 
   render() {
     //if theres no items in the list, show nothing
-    if(this.props.list.length === 0){
+    if(this.props.totalTodos === 0){
       return null
     }
 
     return (
       <section className="main">
         {this.renderMarkAllCompletedButton()}
-        <TodoList
-          list={this.props.list}
-          deleteItemFromTodoList={this.props.deleteItemFromTodoList}
-          editItemFromTodoList={this.props.editItemFromTodoList}
-          filter={this.props.filter}
-        />
+        <TodoListContainer/>
       </section>
     )
   }
