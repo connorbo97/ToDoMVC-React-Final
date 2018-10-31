@@ -33,14 +33,14 @@ class TodoList extends React.Component {
       //else render the todo as a Todo Component
       return (
         <Todo
-          key={index}
+          key={index + JSON.stringify(todo)}
           index={index}
           //this makes a prop for each key in todo
           //e.g title={todo.title} finished={todo.finished} etc.
           {...todo}
           todo={todo}
-          deleteItem={()=>this.props.deleteItemFromTodoList(index)}
-          editItem={(editedItem)=>this.props.editItemFromTodoList(editedItem, index)}
+          deleteItem={()=>this.props.deleteTodo(index)}
+          editItem={(editedItem)=>this.props.editTodo(editedItem, index)}
         />
       )
     })

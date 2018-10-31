@@ -11,24 +11,24 @@ class Footer extends React.Component {
   renderClearCompleted = () => {
     //if there's no completed items
     //don't render the button
-    if(this.props.count === this.props.total){
+    if(this.props.count === this.props.totalTodos){
       return null
     }
     
     return (
-      <button className="clear-completed" onClick={this.props.clearCompleted}>Clear completed</button>
+      <button className="clear-completed" onClick={this.props.clearCompletedTodos}>Clear completed</button>
     )
   }
 
   render() {
     //if there's no todos, render nothing
-    if(this.props.total == 0){
+    if(this.props.totalTodos == 0){
       return null
     }
 
     return (
       <footer className="footer">
-        <span className="todo-count"><strong>{this.props.count}</strong> items left</span>
+        <span className="todo-count"><strong>{this.props.numTodosUnfinished}</strong> items left</span>
         <ul className="filters">
           <li>
             <a className={this.props.filter === 0 ? "selected" : 0} href="#/" onClick={()=>this.props.updateFilter(0)}>All</a>

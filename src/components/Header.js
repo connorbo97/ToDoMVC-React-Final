@@ -5,7 +5,7 @@ const Header = (props) => {
   return (
     <header className="header">
       <h1>todos</h1>
-      <Input appendItemToDoList={props.appendItemToDoList}/>
+      <Input appendItemToDoList={props.addTodo}/>
     </header>
   )
 }
